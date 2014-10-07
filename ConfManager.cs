@@ -18,6 +18,7 @@ namespace LSEHub.ConfTool
         private Queue<RawMessage> outQ;
         QFNApp qfnapp;
         public event Action EndOfScenarioEvent;
+        private List<MessageResult> results;
 
         public ConfManager()
         {
@@ -32,6 +33,7 @@ namespace LSEHub.ConfTool
             messages = new List<string>();
             inQ = new Queue<Message>();
             outQ = new Queue<RawMessage>();
+            results = new List<MessageResult>();
 
             const string format = "{0,-30} {1,0}";
             Console.WriteLine(string.Format(format,"Initialising conformance test:", xScenario.Attributes["Name"].Value));
@@ -95,17 +97,13 @@ namespace LSEHub.ConfTool
                     Console.WriteLine("Expected: {0}", rm.Message);
 
                     MessageResult mr = new MessageResult(rm.Message, msg.ToString());
+                    results.Add(mr);
 
                 }
 
                 if (outQ.Count == 0)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("End of Test");
-                    Console.WriteLine("Press any key to process results");
-                    Console.ReadKey();
-                    if (EndOfScenarioEvent != null)
-                        EndOfScenarioEvent();
+                    ProcessResults();
                 }
             }
 
@@ -118,13 +116,7 @@ namespace LSEHub.ConfTool
 
                 if (outQ.Count == 0)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("End of Test");
-                    Console.WriteLine("Press any key to process results");
-                    Console.ReadKey();
-                    
-                    if (EndOfScenarioEvent != null)
-                        EndOfScenarioEvent();
+                    ProcessResults();
                 }
             }
 
@@ -133,7 +125,47 @@ namespace LSEHub.ConfTool
 
         public void ProcessResults()
         {
+            Console.WriteLine();
+            Console.WriteLine("End of Test");
+            Console.WriteLine("Press any key to process results");
+            Console.ReadKey();
 
+            int i=1;
+            foreach(MessageResult mr in results)
+            {
+                Console.WriteLine("Result {0}", i.ToString());
+                Console.WriteLine("Expected: {0}", mr.Expected);
+                Console.WriteLine("Actual: {0}", mr.Actual);
+
+                string matched="";
+                foreach (TagValue tv in mr.GetMatched())
+                {
+                    matched += (tv.GetTagVal() +",");
+                }
+                Console.WriteLine("\tMatched: {0}", matched);
+
+                string missing = "";
+                foreach (TagValue tv in mr.GetMissing())
+                {
+                    missing += (tv.GetTagVal() + ",");
+                }
+                Console.WriteLine("\tMissing: {0}", missing);
+
+                string extras = "";
+                foreach (TagValue tv in mr.GetExtra())
+                {
+                    extras += (tv.GetTagVal() + ",");
+                }
+                Console.WriteLine("\tExtras: {0}", extras);
+
+                Console.WriteLine();
+                i++;
+            }
+
+            Console.ReadKey();
+
+            if (EndOfScenarioEvent != null)
+                EndOfScenarioEvent();
         }
     }
 }

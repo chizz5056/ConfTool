@@ -88,6 +88,7 @@ namespace LSEHub.ConfTool
             ConfigurationSingleton.Instance.RemovaAllQFNSettings();
             ConfigurationSingleton.Instance.AddQFNSettings(defaults);
             ConfigurationSingleton.Instance.AddQFNSettings(sessionID, session);
+            ConfigurationSingleton.Instance.SetTagsToIgnore(xDoc.Root.Element("TagsToIgnore").Value);
 
             sc = new List<string>();
             scNodes = new List<XmlNode>();

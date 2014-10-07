@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace LSEHub.ConfTool
 {
-    public class TagValue
+    public struct TagValue
     {
         public int Tag {get;set;}
         public string Value {get;set;}
 
-        public TagValue(int tag, string val)
+        public TagValue(int tag, string val) : this()
         {
             Tag = tag;
             Value = val;
         }
+
+        public string GetTagVal()
+        {
+            return Tag + "=" + Value;
+        }
+
     }
 }

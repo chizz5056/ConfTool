@@ -8,8 +8,23 @@ namespace LSEHub.ConfTool
 {
     public class MessageResult
     {
-        string expected;
-        string actual;
+        public string Expected { get; set; }
+        public string Actual { get; set; }
+        
+        public List<TagValue> GetMatched()
+        {
+            return matchedList;
+        }
+
+        public List<TagValue> GetMissing()
+        {
+            return missingList;
+        }
+
+        public List<TagValue> GetExtra()
+        {
+            return extraList;
+        }
 
         List<TagValue> expectedList;
         List<TagValue> actualList;
@@ -18,10 +33,10 @@ namespace LSEHub.ConfTool
         List<TagValue> missingList;
         List<TagValue> extraList;
 
-        public MessageResult(string Expected, string Actual)
+        public MessageResult(string expected, string actual)
         {
-            expected = Expected;
-            actual = Actual;
+            Expected = expected;
+            Actual = actual;
             expectedList = MessageFunctions.GetTagValueList(expected);
             actualList = MessageFunctions.GetTagValueList(actual);
             CompareMessages();
@@ -33,29 +48,33 @@ namespace LSEHub.ConfTool
             missingList = new List<TagValue>();
             extraList = new List<TagValue>();
 
+            List<int> ignore = ConfigurationSingleton.Instance.TagsToIgnore();
+
             foreach (TagValue tv in expectedList)
             {
-                if (actualList.Contains(tv))
+                if (!ignore.Contains(tv.Tag))
                 {
-                    matchedList.Add(tv);
-                }
-                else if(!actualList.Contains(tv))
-                {
-                    missingList.Add(tv);
+                    if (actualList.Contains(tv))
+                    {
+                        matchedList.Add(tv);
+                    }
+                    else if (!actualList.Contains(tv))
+                    {
+                        missingList.Add(tv);
+                    }
                 }
             }
 
             foreach (TagValue tv in actualList)
-            { 
-                if(!expectedList.Contains(tv))
+            {
+                if (!ignore.Contains(tv.Tag))
                 {
-                    extraList.Add(tv);
+                    if (!expectedList.Contains(tv))
+                    {
+                        extraList.Add(tv);
+                    }
                 }
             }
-
-
         }
-
-
     }
 }

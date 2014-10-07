@@ -42,6 +42,17 @@ namespace LSEHub.ConfTool
             qfnSettings = new SessionSettings();
         }
 
+        private List<int> tagsToIgnore;
+        public List<int> TagsToIgnore()
+        {
+            return tagsToIgnore;
+        }
+
+        public void SetTagsToIgnore(string csvTags)
+        {
+            tagsToIgnore = csvTags.Split(',').Select(n => int.Parse(n)).ToList();
+        }
+
 
     }
 }

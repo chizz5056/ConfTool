@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <Config>
-  <QFNMessageGeneration>
-    <TagsToIgnore>8,9,10,52,370,59,56,115,128</TagsToIgnore>
-  </QFNMessageGeneration>
+  <TagsToIgnore>8,9,10,34,52,370,49,56,115,128</TagsToIgnore>
   <QFNSessionSettings>
     <Default>
       <FileStorePath>store</FileStorePath>
