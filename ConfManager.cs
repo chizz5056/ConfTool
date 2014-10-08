@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
+using System.IO;
 
 using QuickFix;
 
@@ -92,9 +93,9 @@ namespace LSEHub.ConfTool
                 {
                     RawMessage rm = outQ.Dequeue();
                     Debug.WriteLine("Q:{0} Incoming:{1} - {2}", outQ.Count.ToString(), isIncoming.ToString(), msg.ToString());
-                    Console.WriteLine();
-                    Console.WriteLine("Received: {0}", msg.ToString());
-                    Console.WriteLine("Expected: {0}", rm.Message);
+                    //Console.WriteLine();
+                    //Console.WriteLine("Received: {0}", msg.ToString());
+                    //Console.WriteLine("Expected: {0}", rm.Message);
 
                     MessageResult mr = new MessageResult(rm.Message, msg.ToString());
                     results.Add(mr);
@@ -130,36 +131,57 @@ namespace LSEHub.ConfTool
             Console.WriteLine("Press any key to process results");
             Console.ReadKey();
 
-            int i=1;
-            foreach(MessageResult mr in results)
+            using (StreamWriter sw = new StreamWriter(xScenario.Attributes["Name"].Value + "_RESULTS.txt"))
             {
-                Console.WriteLine("Result {0}", i.ToString());
-                Console.WriteLine("Expected: {0}", mr.Expected);
-                Console.WriteLine("Actual: {0}", mr.Actual);
 
-                string matched="";
-                foreach (TagValue tv in mr.GetMatched())
+                int i = 1;
+                foreach (MessageResult mr in results)
                 {
-                    matched += (tv.GetTagVal() +",");
-                }
-                Console.WriteLine("\tMatched: {0}", matched);
+                    Console.WriteLine("Message Result {0}", i.ToString());
+                    sw.WriteLine("Message Result {0}", i.ToString());
+                    sw.WriteLine();
+                    Console.WriteLine("Expected: {0}", mr.Expected);
+                    sw.WriteLine("Expected: {0}", mr.Expected);
+                    sw.WriteLine();
+                    Console.WriteLine("Actual: {0}", mr.Actual);
+                    sw.WriteLine("Actual: {0}", mr.Actual.Replace("\x01","|"));
+                    sw.WriteLine();
 
-                string missing = "";
-                foreach (TagValue tv in mr.GetMissing())
-                {
-                    missing += (tv.GetTagVal() + ",");
-                }
-                Console.WriteLine("\tMissing: {0}", missing);
+                    string matched = "";
+                    foreach (TagValue tv in mr.GetMatched())
+                    {
+                        matched += (tv.GetTagVal() + ",");
+                    }
+                    matched = matched.Remove(matched.Length - 1);
+                    Console.WriteLine("\tMatched: {0}", matched);
+                    sw.WriteLine("\tMatched: {0}", matched);
+                    sw.WriteLine();
 
-                string extras = "";
-                foreach (TagValue tv in mr.GetExtra())
-                {
-                    extras += (tv.GetTagVal() + ",");
-                }
-                Console.WriteLine("\tExtras: {0}", extras);
+                    string missing = "";
+                    foreach (TagValue tv in mr.GetMissing())
+                    {
+                        missing += (tv.GetTagVal() + ",");
+                    }
+                    missing = missing.Remove(missing.Length - 1);
+                    Console.WriteLine("\tMissing: {0}", missing);
+                    sw.WriteLine("\tMissing: {0}", missing);
+                    sw.WriteLine();
 
-                Console.WriteLine();
-                i++;
+                    string extras = "";
+                    foreach (TagValue tv in mr.GetExtra())
+                    {
+                        extras += (tv.GetTagVal() + ",");
+                    }
+                    extras = extras.Remove(extras.Length - 1);
+                    Console.WriteLine("\tExtras: {0}", extras);
+                    sw.WriteLine("\tExtras: {0}", extras);
+                    sw.WriteLine();
+                    sw.WriteLine();
+                    sw.WriteLine();
+                    Console.WriteLine();
+                    i++;
+                }
+
             }
 
             Console.ReadKey();
@@ -169,3 +191,4 @@ namespace LSEHub.ConfTool
         }
     }
 }
+

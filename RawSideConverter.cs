@@ -205,8 +205,8 @@ namespace LSEHub.ConfTool
                         break;
                 }
 
-                Console.WriteLine();
-                Console.WriteLine(newM);
+                //Console.WriteLine();
+                //Console.WriteLine(newM);
 
                 RawMessage rm = new RawMessage(newM, md);
                 _convertedMessages.Add(rm);
