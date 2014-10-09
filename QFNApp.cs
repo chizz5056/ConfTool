@@ -49,7 +49,7 @@ namespace LSEHub.ConfTool
         {
             //RawToQFNGenerator.QFNMessage(message);
             if (IsConnected)
-                Session.SendToTarget(RawToQFNGenerator.QFNMessage(message));
+                Session.SendToTarget(message.QFNMessage());
         }
 
         public void FromAdmin(Message message, SessionID sessionID)

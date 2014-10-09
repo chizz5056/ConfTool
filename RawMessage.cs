@@ -19,5 +19,21 @@ namespace LSEHub.ConfTool
             Direction = md;
             MsgType = MessageFunctions.GetTagValue(35, message);
         }
+
+        public QuickFix.Message QFNMessage()
+        {
+            string raw=Message;
+            if (raw.Contains("|"))
+            {
+                raw = raw.Replace("|", "\x01");
+            }
+            var qfnMessage = new QuickFix.Message(raw, false);
+            qfnMessage.Header.SetField(new QuickFix.Fields.MsgType(MsgType));
+            qfnMessage.Header.SetField(new QuickFix.Fields.BeginString(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("BeginString")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.SenderCompID(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("SenderCompID")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.TargetCompID(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("TargetCompID")));
+
+            return qfnMessage;
+        }
     }
 }

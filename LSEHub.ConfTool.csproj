@@ -51,7 +51,6 @@
     <Compile Include="MessageResult.cs" />
     <Compile Include="QFNApp.cs" />
     <Compile Include="RawMessage.cs" />
-    <Compile Include="RawToQFNGenerator.cs" />
     <Compile Include="MessageFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,15 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="acceptor.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="initiator.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="initiator - Copy.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scenarios.xml">
