@@ -55,7 +55,6 @@
     <Compile Include="QFNApp.cs" />
     <Compile Include="RawMessage.cs" />
     <Compile Include="RawToQFNGenerator.cs" />
-    <Compile Include="TagGenerator.cs" />
     <Compile Include="MessageFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

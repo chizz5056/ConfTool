@@ -18,14 +18,12 @@ namespace LSEHub.ConfTool
         //private const string SOH = "\x01";
         private const string SOH = "|";
         private string _nos;
-        private TagGenerator _tagGen;
 
         public RawSideConverter(Side side, List<string> messages)
         {
             _convertedMessages = new List<RawMessage>();
             _side = side;
             _messages = messages;
-            _tagGen = new TagGenerator();
         }
 
         public void Convert()
@@ -106,9 +104,10 @@ namespace LSEHub.ConfTool
                         md = MessageDirection.OUTBOUND;
 
                         // IDs
-                        newM = MessageFunctions.SetTagValue(11, newM, _tagGen.GetClOrdID());
-                        newM = MessageFunctions.SetTagValue(41, newM, _tagGen.GetPrevClOrdID());
-                        
+                        newM = MessageFunctions.SetTagValue(11, newM, ConfigurationSingleton.Instance.NextClOrdID);
+                        newM = MessageFunctions.SetTagValue(41, newM, ConfigurationSingleton.Instance.CurrentClOrdID);
+                        newM = MessageFunctions.SetTagValue(50, newM, "LSE");
+                        newM = MessageFunctions.SetTagValue(60, newM, ConfigurationSingleton.Instance.GetUtcTimestamp());
 
                         // CompIds
                         if (MessageFunctions.ContainsTag(128, newM))
@@ -146,6 +145,13 @@ namespace LSEHub.ConfTool
                         // Direction
                         md = MessageDirection.INBOUND;
 
+                        // IDs
+                        newM = MessageFunctions.SetTagValue(11, newM, ConfigurationSingleton.Instance.CurrentClOrdID);
+                        if (MessageFunctions.ContainsTag(41, newM))  //Need to check if 41 exists, otherwise if at start of order-chain the PrevClOrdID prob won't exist!
+                        {
+                            newM = MessageFunctions.SetTagValue(41, newM, ConfigurationSingleton.Instance.PrevClOrdID);
+                        }
+
                         // CompIds
                         if (MessageFunctions.ContainsTag(115, newM))
                         {
@@ -159,6 +165,8 @@ namespace LSEHub.ConfTool
                         newM = MessageFunctions.SetTagValue(128, newM, MessageFunctions.GetTagValue(49, newM));
                         newM = MessageFunctions.SetTagValue(49, newM, "LSEHub");
                         newM = MessageFunctions.SetTag(128, 115, newM);
+                        newM = MessageFunctions.SetTagValue(57, newM, "LSE");
+                        newM = MessageFunctions.SetTagValue(129, newM, "LSE");
 
                         // SubIds
 

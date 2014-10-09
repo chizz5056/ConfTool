@@ -14,9 +14,12 @@ namespace LSEHub.ConfTool
 
         public static ConfigurationSingleton Instance { get { return lazy.Value; } }
 
+        private int _ID;
+
         private ConfigurationSingleton()
         {
-            qfnSettings = new SessionSettings();        
+            qfnSettings = new SessionSettings();
+            _ID = 1;
         }
 
         public SessionSettings QFNSettings
@@ -51,6 +54,41 @@ namespace LSEHub.ConfTool
         public void SetTagsToIgnore(string csvTags)
         {
             tagsToIgnore = csvTags.Split(',').Select(n => int.Parse(n)).ToList();
+        }
+
+        public string NextClOrdID
+        {
+            get
+            {
+                string s = "LSE" + _ID.ToString().PadLeft(5, '0');
+                PrevClOrdID = CurrentClOrdID;
+                CurrentClOrdID = s;
+                _ID++;
+                return s;
+            }
+        }
+
+
+        public string CurrentClOrdID {get;private set;}
+        //{
+        //    string s = "LSE" + (_ID - 2).ToString().PadLeft(5, '0');
+        //    return s;
+        //}
+
+        public string PrevClOrdID {get;private set;}
+        //{
+        //    string s = "LSE" + (_ID - 3).ToString().PadLeft(5, '0');
+        //    return s;
+        //}
+
+        public string GetUtcDate()
+        {
+            return DateTime.UtcNow.ToString("yyyyMMdd");
+        }
+
+        public string GetUtcTimestamp()
+        {
+            return DateTime.UtcNow.ToString("yyyyMMdd-HH:mm:ss");
         }
 
 
