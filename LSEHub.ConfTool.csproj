@@ -48,10 +48,7 @@
     <Compile Include="ConfigurationSingleton.cs" />
     <Compile Include="ConfManager.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="InboundMessage.cs" />
     <Compile Include="MessageResult.cs" />
-    <Compile Include="MessageTaskBase.cs" />
-    <Compile Include="OutboundMessage.cs" />
     <Compile Include="QFNApp.cs" />
     <Compile Include="RawMessage.cs" />
     <Compile Include="RawToQFNGenerator.cs" />
@@ -59,8 +56,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawSideConverter.cs" />
-    <Compile Include="RawScenarioProcessor.cs" />
-    <Compile Include="ScenarioProcessorBase.cs" />
     <Compile Include="TagValue.cs" />
     <Compile Include="TestMenu.cs" />
   </ItemGroup>
