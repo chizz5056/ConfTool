@@ -11,7 +11,7 @@ using QuickFix;
 
 namespace LSEHub.ConfTool
 {
-    public class ConfManager
+    public class ConformanceManager
     {
         private XmlNode xScenario;
         private List<string> messages;
@@ -21,7 +21,7 @@ namespace LSEHub.ConfTool
         public event Action EndOfScenarioEvent;
         private List<MessageResult> results;
 
-        public ConfManager()
+        public ConformanceManager()
         {
             qfnapp = new QFNApp(ConfigurationSingleton.Instance.QFNSettings);
             qfnapp.MessageEvent += new Action<QuickFix.Message, bool>(ProcessMessage);
@@ -38,12 +38,23 @@ namespace LSEHub.ConfTool
 
             const string format = "{0,-30} {1,0}";
             Console.WriteLine(string.Format(format,"Initialising conformance test:", xScenario.Attributes["Name"].Value));
-            Console.WriteLine(string.Format(format,"Sender CompID:", xScenario.Attributes["SenderCompID"].Value));
-            Console.WriteLine(string.Format(format, "Counterparty CompID:", xScenario.Attributes["DeliverToCompID"].Value));
-            Console.WriteLine(string.Format(format, "Ignore session messages:", xScenario.Attributes["IgnoreSessionMessages"].Value));
-            Console.WriteLine(string.Format(format, "Ignore unexpected messages:", xScenario.Attributes["IgnoreUnexpectedMessages"].Value));
-            Console.WriteLine(string.Format(format, "Type:", xScenario.Attributes["Type"].Value));
             Console.WriteLine(string.Format(format, "Side:", xScenario.Attributes["Side"].Value));
+            Console.WriteLine(string.Format(format, "Type:", xScenario.Attributes["Type"].Value));
+            
+            //Console.WriteLine(string.Format(format,"Sender CompID:", xScenario.Attributes["SenderCompID"].Value));
+            //Console.WriteLine(string.Format(format, "Counterparty CompID:", xScenario.Attributes["DeliverToCompID"].Value));
+            //Console.WriteLine(string.Format(format, "Ignore session messages:", xScenario.Attributes["IgnoreSessionMessages"].Value));
+            //Console.WriteLine(string.Format(format, "Ignore unexpected messages:", xScenario.Attributes["IgnoreUnexpectedMessages"].Value));
+
+            Console.WriteLine(string.Format(format, "SenderCompID:", ConfigurationSingleton.Instance.GetSetting("SenderCompID")));
+            Console.WriteLine(string.Format(format, "TargetCompID:", ConfigurationSingleton.Instance.GetSetting("TargetCompID")));
+            Console.WriteLine(string.Format(format, "DeliverToCompID:", ConfigurationSingleton.Instance.GetSetting("DeliverToCompID")));
+            //Console.WriteLine(string.Format(format, "Ignore session messages:", xScenario.Attributes["IgnoreSessionMessages"].Value));
+            //Console.WriteLine(string.Format(format, "Ignore unexpected messages:", xScenario.Attributes["IgnoreUnexpectedMessages"].Value));
+
+            Console.WriteLine();
+            
+            
 
             
             switch ((ScenarioType)Enum.Parse(typeof(ScenarioType), xScenario.Attributes["Type"].Value))
@@ -98,6 +109,7 @@ namespace LSEHub.ConfTool
                     //Console.WriteLine("Expected: {0}", rm.Message);
 
                     MessageResult mr = new MessageResult(rm.Message, msg.ToString());
+                    ProcessResult(mr);
                     results.Add(mr);
 
                 }
@@ -124,6 +136,43 @@ namespace LSEHub.ConfTool
 
         }
 
+        public void ProcessResult(MessageResult mr)
+        {
+            //Console.WriteLine("Message Result {0}", i.ToString());
+            
+            
+            Console.WriteLine("Expected: {0}", mr.Expected);
+            
+            
+            Console.WriteLine("Actual: {0}", mr.Actual);
+            
+            string matched = "";
+            foreach (TagValue tv in mr.GetMatched())
+            {
+                matched += (tv.GetTagVal() + ",");
+            }
+            matched = matched.Remove(matched.Length - 1);
+            Console.WriteLine("\tMatched: {0}", matched);
+            
+            string missing = "";
+            foreach (TagValue tv in mr.GetMissing())
+            {
+                missing += (tv.GetTagVal() + ",");
+            }
+            missing = missing.Remove(missing.Length - 1);
+            Console.WriteLine("\tMissing: {0}", missing);
+            
+
+            string extras = "";
+            foreach (TagValue tv in mr.GetExtra())
+            {
+                extras += (tv.GetTagVal() + ",");
+            }
+            extras = extras.Remove(extras.Length - 1);
+            Console.WriteLine("\tExtras: {0}", extras);
+            Console.WriteLine();
+        }
+
         public void ProcessResults()
         {
             Console.WriteLine();
@@ -137,13 +186,13 @@ namespace LSEHub.ConfTool
                 int i = 1;
                 foreach (MessageResult mr in results)
                 {
-                    Console.WriteLine("Message Result {0}", i.ToString());
+                    //Console.WriteLine("Message Result {0}", i.ToString());
                     sw.WriteLine("Message Result {0}", i.ToString());
                     sw.WriteLine();
-                    Console.WriteLine("Expected: {0}", mr.Expected);
+                    //Console.WriteLine("Expected: {0}", mr.Expected);
                     sw.WriteLine("Expected: {0}", mr.Expected);
                     sw.WriteLine();
-                    Console.WriteLine("Actual: {0}", mr.Actual);
+                    //Console.WriteLine("Actual: {0}", mr.Actual);
                     sw.WriteLine("Actual: {0}", mr.Actual.Replace("\x01","|"));
                     sw.WriteLine();
 
@@ -153,7 +202,7 @@ namespace LSEHub.ConfTool
                         matched += (tv.GetTagVal() + ",");
                     }
                     matched = matched.Remove(matched.Length - 1);
-                    Console.WriteLine("\tMatched: {0}", matched);
+                    //Console.WriteLine("\tMatched: {0}", matched);
                     sw.WriteLine("\tMatched: {0}", matched);
                     sw.WriteLine();
 
@@ -163,7 +212,7 @@ namespace LSEHub.ConfTool
                         missing += (tv.GetTagVal() + ",");
                     }
                     missing = missing.Remove(missing.Length - 1);
-                    Console.WriteLine("\tMissing: {0}", missing);
+                    //Console.WriteLine("\tMissing: {0}", missing);
                     sw.WriteLine("\tMissing: {0}", missing);
                     sw.WriteLine();
 
@@ -173,12 +222,12 @@ namespace LSEHub.ConfTool
                         extras += (tv.GetTagVal() + ",");
                     }
                     extras = extras.Remove(extras.Length - 1);
-                    Console.WriteLine("\tExtras: {0}", extras);
+                    //Console.WriteLine("\tExtras: {0}", extras);
                     sw.WriteLine("\tExtras: {0}", extras);
                     sw.WriteLine();
                     sw.WriteLine();
                     sw.WriteLine();
-                    Console.WriteLine();
+                    //Console.WriteLine();
                     i++;
                 }
 

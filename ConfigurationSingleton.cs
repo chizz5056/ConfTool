@@ -26,8 +26,18 @@ namespace LSEHub.ConfTool
         {
             get { return qfnSettings; }
         }
+
+        public string GetSetting(string val)
+        {
+            //return qfnSettings.Get(). .Get().GetString("val");
+            //HashSet<SessionID> hs = qfnSettings.GetSessions();
+            //List<SessionID> ls = hs.ToList();
+            //SessionID sid = ls[0];
+            return qfnSettings.Get(sessionID).GetString(val);
+        }
         
         private SessionSettings qfnSettings;
+        private SessionID sessionID;
 
         public void AddQFNSettings(QuickFix.Dictionary dic)
         {
@@ -38,6 +48,7 @@ namespace LSEHub.ConfTool
         public void AddQFNSettings(SessionID sid, QuickFix.Dictionary dic)
         {
             qfnSettings.Set(sid, dic);
+            sessionID = sid;
         }
 
         public void RemovaAllQFNSettings()

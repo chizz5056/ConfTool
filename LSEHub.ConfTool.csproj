@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationSingleton.cs" />
-    <Compile Include="ConfManager.cs" />
+    <Compile Include="ConformanceManager.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="MessageResult.cs" />
     <Compile Include="QFNApp.cs" />

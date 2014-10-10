@@ -29,9 +29,10 @@ namespace LSEHub.ConfTool
             }
             var qfnMessage = new QuickFix.Message(raw, false);
             qfnMessage.Header.SetField(new QuickFix.Fields.MsgType(MsgType));
-            qfnMessage.Header.SetField(new QuickFix.Fields.BeginString(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("BeginString")));
-            qfnMessage.Header.SetField(new QuickFix.Fields.SenderCompID(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("SenderCompID")));
-            qfnMessage.Header.SetField(new QuickFix.Fields.TargetCompID(ConfigurationSingleton.Instance.QFNSettings.Get().GetString("TargetCompID")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.BeginString(ConfigurationSingleton.Instance.GetSetting("BeginString")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.SenderCompID(ConfigurationSingleton.Instance.GetSetting("SenderCompID")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.TargetCompID(ConfigurationSingleton.Instance.GetSetting("TargetCompID")));
+            qfnMessage.Header.SetField(new QuickFix.Fields.DeliverToCompID(ConfigurationSingleton.Instance.GetSetting("DeliverToCompID")));
 
             return qfnMessage;
         }

@@ -13,9 +13,9 @@ namespace LSEHub.ConfTool
 {
     public class TestMenu
     {
-        ConfManager cm;
+        ConformanceManager cm;
         XmlDocument xmlDoc;
-        QuickFix.Dictionary defaults;
+        //QuickFix.Dictionary defaults;
         QuickFix.Dictionary session;
         List<string> sc;
         List<XmlNode> scNodes;
@@ -23,7 +23,7 @@ namespace LSEHub.ConfTool
         public TestMenu()
         {
             LoadXml();
-            cm = new ConfManager();
+            cm = new ConformanceManager();
             cm.EndOfScenarioEvent += new Action(StartMenu);
             StartMenu();
         }
@@ -68,12 +68,12 @@ namespace LSEHub.ConfTool
             XDocument xDoc = XDocument.Load("Scenarios.xml");
 
             // QFN Default Session Settings
-            defaults = new Dictionary();
-            IEnumerable<XElement> xDefault = xDoc.Root.Element("QFNSessionSettings").Element("Default").Descendants();
-            foreach (XElement xe in xDefault)
-            {
-                defaults.SetString(xe.Name.ToString(), xe.Value);
-            }
+            //defaults = new Dictionary();
+            //IEnumerable<XElement> xDefault = xDoc.Root.Element("QFNSessionSettings").Element("Default").Descendants();
+            //foreach (XElement xe in xDefault)
+            //{
+            //    defaults.SetString(xe.Name.ToString(), xe.Value);
+            //}
 
             // QFN Specific Session Settings
             session = new Dictionary();
@@ -86,7 +86,7 @@ namespace LSEHub.ConfTool
             SessionID sessionID = new SessionID(session.GetString("BeginString"), session.GetString("SenderCompID"), session.GetString("TargetCompID"));
 
             ConfigurationSingleton.Instance.RemovaAllQFNSettings();
-            ConfigurationSingleton.Instance.AddQFNSettings(defaults);
+            //ConfigurationSingleton.Instance.AddQFNSettings(defaults);
             ConfigurationSingleton.Instance.AddQFNSettings(sessionID, session);
             ConfigurationSingleton.Instance.SetTagsToIgnore(xDoc.Root.Element("TagsToIgnore").Value);
 
