@@ -71,6 +71,9 @@
       <RX CheckType="Expect"></RX>
       <RX CheckType="Ignore"></RX>
     </Scenario>
+    <Scenario Name="LSEPROQUAT" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=208|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1506|116=AH|52=20140815-10:10:50|370=20140815-10:10:50|11=yAA0046|21=3|100=L|55=BCKFY51|48=BCKFY51|22=2|54=2|60=20140815-10:10:50|38=160000|40=2|44=268.50000000|15=GBP|10=062|</Message>
+    </Scenario>
 </Scenarios>
 </Config>
 

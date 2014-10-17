@@ -86,6 +86,13 @@ namespace LSEHub.ConfTool
                         RawMessage rm = outQ.Dequeue();
                         qfnapp.Send(rm);
                     }
+
+                    // Means we're only sending a single message and not receiving any at all
+                    if (outQ.Count == 0)
+                    {
+                        if (EndOfScenarioEvent != null)
+                            EndOfScenarioEvent();
+                    }
                     break;
             }
 
