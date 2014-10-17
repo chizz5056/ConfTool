@@ -8,18 +8,18 @@
       <ConnectionType>initiator</ConnectionType>
       <ReconnectInterval>60</ReconnectInterval>
       <BeginString>FIX.4.2</BeginString>
-      <SenderCompID>LSECONF</SenderCompID>
+      <SenderCompID>BLKUK</SenderCompID>
       <TargetCompID>LSEHub</TargetCompID>
       <StartTime>22:30:00</StartTime>
       <EndTime>22:29:59</EndTime>
       <HeartBtInt>30</HeartBtInt>
       <SocketConnectPort>2001</SocketConnectPort>
-      <SocketConnectHost>127.0.0.1</SocketConnectHost>
+      <SocketConnectHost>10.80.155.86</SocketConnectHost>
       <DataDictionary>FIX42.xml</DataDictionary>
       <ResetOnLogon>Y</ResetOnLogon>
       <IgnoreSessionMessages>true</IgnoreSessionMessages>
       <IgnoreUnexpectedMessages>true</IgnoreUnexpectedMessages>
-      <DeliverToCompID>INI002</DeliverToCompID>
+      <DeliverToCompID>RING2</DeliverToCompID>
     </Session>
   </QFNSessionSettings>
   <Scenarios>
@@ -71,8 +71,20 @@
       <RX CheckType="Expect"></RX>
       <RX CheckType="Ignore"></RX>
     </Scenario>
-    <Scenario Name="LSEPROQUAT" Type="Raw" Side="Buy">
+    <Scenario Name="LSEPROQUAT1" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=189|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1481|116=AH|52=20140815-10:06:10|370=20140815-10:06:10|11=yAA0029|21=3|100=S|55=5914270|48=5914270|22=2|54=1|60=20140815-10:06:10|38=506|40=1|15=CHF|10=242|</Message>
+    </Scenario>
+    <Scenario Name="LSEPROQUAT2" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=198|35=D|49=LSEHub|56=ROYB|115=BLKUKNITE|128=NITE|34=2031|116=AH|52=20140822-14:40:37|370=20140822-14:40:37|11=yAA0004-20140822|21=3|100=L|55=BH4HKS3|48=BH4HKS3|22=2|54=1|60=20140822-14:40:37|38=144|40=1|15=GBp|10=179|</Message>
+    </Scenario>
+    <Scenario Name="LSEPROQUAT3" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=193|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1484|116=AH|52=20140815-10:06:10|370=20140815-10:06:10|11=yAA0032|21=3|100=VX|55=7103065|48=7103065|22=2|54=2|60=20140815-10:06:10|38=154071|40=1|15=CHF|10=209|</Message>
+    </Scenario>
+    <Scenario Name="LSEPROQUAT4" Type="Raw" Side="Buy">
       <Message>8=FIX.4.2|9=208|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1506|116=AH|52=20140815-10:10:50|370=20140815-10:10:50|11=yAA0046|21=3|100=L|55=BCKFY51|48=BCKFY51|22=2|54=2|60=20140815-10:10:50|38=160000|40=2|44=268.50000000|15=GBP|10=062|</Message>
+    </Scenario>
+    <Scenario Name="LSEPROQUAT5" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=208|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1513|116=AH|52=20140815-10:10:50|370=20140815-10:10:50|11=yAA0053|21=3|100=L|55=BKKMKR2|48=BKKMKR2|22=2|54=2|60=20140815-10:10:50|38=204952|40=2|44=441.00000000|15=GBP|10=123|</Message>
     </Scenario>
 </Scenarios>
 </Config>
