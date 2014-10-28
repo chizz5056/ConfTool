@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSEHub.ConfTool", "LSEHub.ConfTool.csproj", "{71022481-5CF0-48DF-9A1B-7A049D5D9960}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSEHub.ConfTool", "ConfTool\LSEHub.ConfTool.csproj", "{71022481-5CF0-48DF-9A1B-7A049D5D9960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixOrderBookRebuilder", "FixOrderBookRebuilder\FixOrderBookRebuilder.csproj", "{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixSchema", "FixSchema\FixSchema.csproj", "{538398A4-8146-4A52-A0E2-8EF563A4401E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{71022481-5CF0-48DF-9A1B-7A049D5D9960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71022481-5CF0-48DF-9A1B-7A049D5D9960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71022481-5CF0-48DF-9A1B-7A049D5D9960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
