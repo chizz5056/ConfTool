@@ -80,12 +80,14 @@ namespace LSEHub.ConfTool
 
                     }
 
-                    if (qfnapp.IsConnected && outQ.Peek().Direction == MessageDirection.OUTBOUND)
-                    {
-                        // Start test by sending first message
-                        RawMessage rm = outQ.Dequeue();
-                        qfnapp.Send(rm);
-                    }
+                    //if (qfnapp.IsConnected && outQ.Peek().Direction == MessageDirection.OUTBOUND)
+                    //{
+                    //    // Start test by sending first message
+                    //    RawMessage rm = outQ.Dequeue();
+                    //    qfnapp.Send(rm);
+                    //}
+
+                    SendNext();
 
                     // Means we're only sending a single message and not receiving any at all
                     if (outQ.Count == 0)
@@ -127,6 +129,13 @@ namespace LSEHub.ConfTool
                 }
             }
 
+            SendNext();
+
+
+        }
+
+        public void SendNext()
+        {
             if (outQ.Count > 0 && outQ.Peek().Direction == MessageDirection.OUTBOUND)
             {
                 System.Threading.Thread.Sleep(100);
@@ -134,13 +143,13 @@ namespace LSEHub.ConfTool
                 if (qfnapp.IsConnected)
                     qfnapp.Send(rm);
 
+                SendNext();
+
                 if (outQ.Count == 0)
                 {
                     ProcessResults();
                 }
             }
-
-
         }
 
         public void ProcessResult(MessageResult mr)
