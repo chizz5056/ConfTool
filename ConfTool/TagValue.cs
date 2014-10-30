@@ -21,6 +21,5 @@ namespace LSEHub.ConfTool
         {
             return Tag + "=" + Value;
         }
-
     }
 }

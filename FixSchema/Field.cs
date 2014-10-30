@@ -12,6 +12,7 @@ namespace FixSchema
         public int Tag { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
+        public FixDataTypes.FixDataType FixType { get; set; }
 
         private SortedDictionary<string, string> _fieldValues;
 
@@ -20,6 +21,7 @@ namespace FixSchema
             Tag = number;
             Name = name;
             Type = type;
+            FixType = FixDataTypes.StringToEnumTransformer(type);
             _fieldValues = new SortedDictionary<string, string>();
         }
 

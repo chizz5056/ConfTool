@@ -74,6 +74,12 @@
     </EmbeddedResource>
     <Content Include="QuickFix.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FixSchema\FixSchema.csproj">
+      <Project>{538398a4-8146-4a52-a0e2-8ef563a4401e}</Project>
+      <Name>FixSchema</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

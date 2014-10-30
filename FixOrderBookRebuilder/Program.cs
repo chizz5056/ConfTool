@@ -20,7 +20,7 @@ namespace FixOrderBookRebuilder
 
         static void Main(string[] args)
         {
-            FixSchema.Schema schema = new FixSchema.Schema();
+            Schema schema = new Schema();
             Dictionary<string, string> fixmessages = ParseLogFiles();
             Dictionary<string, Order> orders = new Dictionary<string, Order>();
 

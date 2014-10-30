@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A07CF3E0-9502-4D56-8593-41F7A3BFAFE6}</ProjectGuid>
+    <ProjectGuid>{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FixOrderBookRebuilder</RootNamespace>
-    <AssemblyName>FixOrderBookRebuilder</AssemblyName>
+    <RootNamespace>TagComparisonTest</RootNamespace>
+    <AssemblyName>TagComparisonTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,10 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chain\OrderChain.cs" />
-    <Compile Include="Chain\OrderChainMessage.cs" />
-    <Compile Include="Chain\OrderChains.cs" />
-    <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,15 +48,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FIX42.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FixSchema\FixSchema.csproj">
       <Project>{538398a4-8146-4a52-a0e2-8ef563a4401e}</Project>
       <Name>FixSchema</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FIX42.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

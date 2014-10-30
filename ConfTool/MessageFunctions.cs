@@ -146,6 +146,31 @@ namespace LSEHub.ConfTool
             }
         } 
 
+        public static Dictionary<int, string> GetTagValueDictionary(string message)
+        {
+            try
+            {
+                string m = message.Replace("\x01", "|");
+                Dictionary<int, string> d = new Dictionary<int, string>();
+
+                while (m.Length > 0)
+                {
+                    int delim = m.IndexOf("|");
+                    string both = m.Substring(0, delim);
+                    string[] tagVal = both.Split('=');
+                    d.Add(int.Parse(tagVal[0]), tagVal[1]);
+                    m = m.Substring(delim + 1);
+                }
+
+                return d;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+        }
+
 
     }
 }

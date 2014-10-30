@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixOrderBookRebuilder", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixSchema", "FixSchema\FixSchema.csproj", "{538398A4-8146-4A52-A0E2-8EF563A4401E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagComparisonTest", "TagComparisonTest\TagComparisonTest.csproj", "{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{538398A4-8146-4A52-A0E2-8EF563A4401E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B060AD-1D0F-4120-99B0-3A3ACE776C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
