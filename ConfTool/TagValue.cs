@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using FixSchema;
+
 namespace LSEHub.ConfTool
 {
     public struct TagValue
@@ -20,6 +22,20 @@ namespace LSEHub.ConfTool
         public string GetTagVal()
         {
             return Tag + "=" + Value;
+        }
+
+        public string GetConvertedTagVal()
+        {
+            Field f = Fields.Instance.GetField(Tag);
+
+            if (f.ContainsFieldValue(Value))
+            {
+                return f.Name + "=" + f.GetFieldValue(Value);
+            }
+            else
+            {
+                return f.Name + "=" + Value;
+            }
         }
     }
 }

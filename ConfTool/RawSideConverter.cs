@@ -104,7 +104,10 @@ namespace LSEHub.ConfTool
                         md = MessageDirection.OUTBOUND;
 
                         // IDs
-                        newM = MessageFunctions.SetTagValue(11, newM, ConfigurationSingleton.Instance.NextClOrdID);
+                        string nextClOrdID = ConfigurationSingleton.Instance.NextClOrdID;
+                        newM = MessageFunctions.SetTagValue(11, newM, nextClOrdID);
+                        ConfigurationSingleton.Instance.AddIDInUse(nextClOrdID);
+
                         newM = MessageFunctions.SetTagValue(41, newM, ConfigurationSingleton.Instance.CurrentClOrdID);
                         newM = MessageFunctions.SetTagValue(50, newM, "LSE");
                         newM = MessageFunctions.SetTagValue(60, newM, ConfigurationSingleton.Instance.GetUtcTimestamp());

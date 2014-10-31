@@ -20,6 +20,7 @@ namespace LSEHub.ConfTool
         {
             qfnSettings = new SessionSettings();
             _ID = 1;
+            ResetIDInUse();
         }
 
         public SessionSettings QFNSettings
@@ -100,6 +101,24 @@ namespace LSEHub.ConfTool
         public string GetUtcTimestamp()
         {
             return DateTime.UtcNow.ToString("yyyyMMdd-HH:mm:ss");
+        }
+
+
+        public void ResetIDInUse()
+        {
+            _Ids = new List<string>();
+        }
+
+        private List<string> _Ids;
+        
+        public List<string> GetIDInUseList()
+        {
+            return _Ids;
+        }
+
+        public void AddIDInUse(string id)
+        {
+            _Ids.Add(id);
         }
 
 
