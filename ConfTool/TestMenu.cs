@@ -100,6 +100,8 @@ namespace LSEHub.ConfTool
                 sc.Add(xNode.Attributes["Name"].Value);
                 scNodes.Add(xNode);
             }
+
+            
         }
     }
 }

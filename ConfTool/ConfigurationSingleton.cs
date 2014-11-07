@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 using QuickFix;
 
@@ -19,7 +21,8 @@ namespace LSEHub.ConfTool
         private ConfigurationSingleton()
         {
             qfnSettings = new SessionSettings();
-            _ID = 1;
+            xDoc = XDocument.Load("Scenarios.xml");
+            _ID = int.Parse(xDoc.Root.Element("ID").Value);
             ResetIDInUse();
         }
 
@@ -39,6 +42,8 @@ namespace LSEHub.ConfTool
         
         private SessionSettings qfnSettings;
         private SessionID sessionID;
+        XDocument xDoc;
+        
 
         public void AddQFNSettings(QuickFix.Dictionary dic)
         {
@@ -76,8 +81,18 @@ namespace LSEHub.ConfTool
                 PrevClOrdID = CurrentClOrdID;
                 CurrentClOrdID = s;
                 _ID++;
+                SaveIDtoXml();
                 return s;
             }
+        }
+
+        private void SaveIDtoXml()
+        {
+            XDocument xdoc = XDocument.Load("Scenarios.xml");
+            var element = xdoc.Root.Element("ID");
+            element.Value = _ID.ToString();
+            xdoc.Save("Scenarios.xml");
+            
         }
 
 

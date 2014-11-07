@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <Config>
+  <ID>100</ID>
   <TagsToIgnore>8,9,10,34,52,370,49,56,115,128,58,60,17,75,37</TagsToIgnore>
   <QFNSessionSettings>
     <Session>
@@ -19,7 +20,7 @@
       <ResetOnLogon>Y</ResetOnLogon>
       <IgnoreSessionMessages>true</IgnoreSessionMessages>
       <IgnoreUnexpectedMessages>true</IgnoreUnexpectedMessages>
-      <DeliverToCompID>RING2</DeliverToCompID>
+      <DeliverToCompID>LIBM</DeliverToCompID>
     </Session>
   </QFNSessionSettings>
   <Scenarios>
