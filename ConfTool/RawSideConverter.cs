@@ -108,7 +108,10 @@ namespace LSEHub.ConfTool
                         newM = MessageFunctions.SetTagValue(11, newM, nextClOrdID);
                         ConfigurationSingleton.Instance.AddIDInUse(nextClOrdID);
 
-                        newM = MessageFunctions.SetTagValue(41, newM, ConfigurationSingleton.Instance.CurrentClOrdID);
+                        if (MessageFunctions.ContainsTag(41, newM))  //Need to check if 41 exists, otherwise if at start of order-chain the PrevClOrdID prob won't exist!
+                        {
+                            newM = MessageFunctions.SetTagValue(41, newM, ConfigurationSingleton.Instance.PrevClOrdID);
+                        }
                         newM = MessageFunctions.SetTagValue(50, newM, "LSE");
                         newM = MessageFunctions.SetTagValue(60, newM, ConfigurationSingleton.Instance.GetUtcTimestamp());
 

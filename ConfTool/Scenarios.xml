@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Config>
-  <ID>100</ID>
+  <ID>200</ID>
   <TagsToIgnore>8,9,10,34,52,370,49,56,115,128,58,60,17,75,37</TagsToIgnore>
   <QFNSessionSettings>
     <Session>
@@ -16,11 +16,12 @@
       <HeartBtInt>30</HeartBtInt>
       <SocketConnectPort>2001</SocketConnectPort>
       <SocketConnectHost>127.0.0.1</SocketConnectHost>
+      <UseDataDictionary>Y</UseDataDictionary>
       <DataDictionary>FIX42.xml</DataDictionary>
       <ResetOnLogon>Y</ResetOnLogon>
       <IgnoreSessionMessages>true</IgnoreSessionMessages>
       <IgnoreUnexpectedMessages>true</IgnoreUnexpectedMessages>
-      <DeliverToCompID>LIBM</DeliverToCompID>
+      <DeliverToCompID>ORIEL2</DeliverToCompID>
     </Session>
   </QFNSessionSettings>
   <Scenarios>
@@ -99,7 +100,19 @@
     <Scenario Name="LSEPROQUAT5" Type="Raw" Side="Buy">
       <Message>8=FIX.4.2|9=208|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1513|116=AH|52=20140815-10:10:50|370=20140815-10:10:50|11=yAA0053|21=3|100=L|55=BKKMKR2|48=BKKMKR2|22=2|54=2|60=20140815-10:10:50|38=204952|40=2|44=441.00000000|15=GBP|10=123|</Message>
     </Scenario>
-</Scenarios>
+    <Scenario Name="CFD" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=208|35=D|49=LSEHub|56=NITE|115=BLKUKNITE|34=1513|116=AH|52=20140815-10:10:50|370=20140815-10:10:50|11=yAA0053|21=3|100=L|55=BKKMKR2|48=BKKMKR2|22=2|54=2|60=20140815-10:10:50|38=204952|40=2|44=441.00000000|15=GBP|775=1|10=123|</Message>
+    </Scenario>
+    <Scenario Name="CFD2" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|35=D|34=293|49=LSEHub|56=NITE|115=BLKUKNITE|50=AH|52=20141204-10:01:06|11=yMZA0002-20141204|15=GBp|21=3|22=2|48=BKKMKR2|38=463|40=2|44=458.80000000|54=1|55=BKKMKR2|100=L|60=20141204-10:01:06|775=1|78=2|79=PB-GS|80=143|79=PB-UBS|80=320|10=120|</Message>
+    </Scenario>
+    <Scenario Name="CFD3" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=228|35=D|34=293|49=BLKUKORIEL2|50=AH|52=20141204-10:01:06|56=ORIEL2|11=yMZA0002-20141204|15=GBp|21=3|22=2|48=BKKMKR2|38=463|40=2|44=458.80000000|54=1|55=BKKMKR2|100=L|60=20141204-10:01:06|775=1|78=2|79=PB-GS|80=143|79=PB-UBS|80=320|10=120|</Message>
+    </Scenario>
+    <Scenario Name="CFD4" Type="Raw" Side="Buy">
+      <Message>8=FIX.4.2|9=211|35=D|34=297|49=BLKUKORIEL2|50=AH|52=20141204-10:02:41|56=ORIEL2|11=yMZA0003-20141204|15=GBp|21=3|22=2|48=BDVZYZ7|38=156|40=2|44=408.30000000|54=1|55=BDVZYZ7|100=L|60=20141204-10:02:41|775=1|78=1|79=PB-BC|80=156|10=030|</Message>
+    </Scenario>
+  </Scenarios>
 </Config>
 
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.IO;
 
 using QuickFix;
 
@@ -22,7 +23,21 @@ namespace LSEHub.ConfTool
         {
             qfnSettings = new SessionSettings();
             xDoc = XDocument.Load("Scenarios.xml");
-            _ID = int.Parse(xDoc.Root.Element("ID").Value);
+            
+            string idFile = "ID.xml";
+
+            if (File.Exists(idFile))
+            {
+                idDoc = XDocument.Load(idFile);
+            }
+            else
+            {
+                idDoc = new XDocument(new XElement("ID",100));
+                idDoc.Save(idFile);
+            }
+
+
+            _ID = int.Parse(idDoc.Element("ID").Value);
             ResetIDInUse();
         }
 
@@ -43,6 +58,7 @@ namespace LSEHub.ConfTool
         private SessionSettings qfnSettings;
         private SessionID sessionID;
         XDocument xDoc;
+        XDocument idDoc;
         
 
         public void AddQFNSettings(QuickFix.Dictionary dic)
@@ -77,36 +93,28 @@ namespace LSEHub.ConfTool
         {
             get
             {
-                string s = "LSE" + _ID.ToString().PadLeft(5, '0');
-                PrevClOrdID = CurrentClOrdID;
-                CurrentClOrdID = s;
+                PrevClOrdID = "LSE" + (_ID-1).ToString().PadLeft(5, '0');
+                CurrentClOrdID = "LSE" + _ID.ToString().PadLeft(5, '0');
                 _ID++;
                 SaveIDtoXml();
-                return s;
+                return CurrentClOrdID;
             }
         }
 
+        public string CurrentClOrdID { get; private set; }
+
+        public string PrevClOrdID { get; private set; }
+
         private void SaveIDtoXml()
         {
-            XDocument xdoc = XDocument.Load("Scenarios.xml");
-            var element = xdoc.Root.Element("ID");
+            XDocument xdoc = XDocument.Load("ID.xml");
+            var element = xdoc.Element("ID");
             element.Value = _ID.ToString();
-            xdoc.Save("Scenarios.xml");
-            
+            xdoc.Save("ID.xml");
         }
 
 
-        public string CurrentClOrdID {get;private set;}
-        //{
-        //    string s = "LSE" + (_ID - 2).ToString().PadLeft(5, '0');
-        //    return s;
-        //}
 
-        public string PrevClOrdID {get;private set;}
-        //{
-        //    string s = "LSE" + (_ID - 3).ToString().PadLeft(5, '0');
-        //    return s;
-        //}
 
         public string GetUtcDate()
         {
